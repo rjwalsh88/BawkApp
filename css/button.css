@@ -1,0 +1,130 @@
+span.buttons {
+	display: inline-block;
+	font-weight: normal;
+	text-align: right;
+	float: right;
+	margin: 0;
+	padding: 0px 0px 3px 0px;
+}
+
+div.toolbox {
+  text-align: center;
+  width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+span.nofloat {
+  float: none;
+}
+
+.hidebutton {
+  opacity: 0;
+}
+.revealbutton:hover .hidebutton, .hidebutton:hover, .hidebutton:active {
+  opacity: 1;
+}
+
+img.buttonicon {
+	border: 0;
+  position: absolute;
+  top: 3px;
+  left: 5px;
+}
+img.roundbuttonicon {
+	border: 0;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+a.button {
+  display: inline-block;
+  height: 17px;
+  font-size: 12px;
+	-moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+  padding: 1px 6px 0px 21px;
+  margin: 1px 3px 0px 3px;
+  text-indent: 0;
+  color: #303030;
+  position: relative;
+  border: 1px solid #808080;
+  box-shadow: 0px 1px 0px #ccc;
+  -moz-box-shadow: 0px 1px 0px #ccc;
+  -webkit-box-shadow: 0px 1px 0px #ccc;
+}
+a.roundbutton {
+  display: inline-block;
+  vertical-align: middle;
+	-moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  height: 18px;
+  width: 18px;
+  position: relative;
+  margin: 1px 3px 0px 3px;
+  color: #303030;
+  border: 1px solid #808080;
+  box-shadow: 0px 1px 0px #ccc;
+  -moz-box-shadow: 0px 1px 0px #ccc;
+  -webkit-box-shadow: 0px 1px 0px #ccc;    
+}
+
+div.toolbox a.button, div.toolbox a.button:hover {
+  width: 75%;
+  margin: 3px 0px 4px 0px;
+}
+
+a.button:hover, a.roundbutton:hover {
+  color: #000000;
+  text-decoration:none;
+}
+
+a.buttonedit, a.buttonpicture {
+  background-color: #F8E8BB;
+}
+a.buttonedit:hover, a.buttonpicture:hover {
+  background-color: #FFF499;
+  border-color: #BB9900;
+}
+a.buttonadd, a.buttonimport, a.buttonclone {
+  background-color: #B0EE98; 
+}
+a.buttonadd:hover, a.buttonimport:hover, a.buttonclone:hover {
+  background-color: #CCFFBB;
+  border-color: #00CC00;
+}
+a.buttonreview, a.buttonclock {
+  background-color: #98C0EE; 
+}
+a.buttonreview:hover, a.buttonclock:hover {
+  background-color: #88E8FF;  
+  border-color: #0088CC;
+}
+a.buttonremove, a.buttonreset {
+  background-color: #E89088;
+}
+a.buttonremove:hover, a.buttonreset:hover {
+  background-color: #FFAA99;
+  border-color: #EE0000;
+}
+a.buttonup, a.buttondown, a.buttonleft, a.buttonright {
+  background-color: #D0A0F0;
+}
+a.buttonup:hover, a.buttondown:hover, a.buttonleft:hover, a.buttonright:hover {
+  background-color: #D890FF;
+  border-color: #A000EE;  
+}
+a.buttonbulletin {
+  background-color: #D8C090;
+}
+a.buttonbulletin:hover {
+  background-color: #F8D070;
+  border-color: #DDAA00;
+}
+a.buttonprint {
+  background-color: #DDDDEE;
+}
+a.buttonprint:hover {
+  background-color: #EEEEFF;
+  border-color: #888899;
+}

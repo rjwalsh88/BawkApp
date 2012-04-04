@@ -1,0 +1,133 @@
+textarea.jobtypes {
+	font-family: Helvetica, arial, sans-serif;
+  font-size: 12px;
+	height: 100px;
+	width: 475px;
+	border: 1px solid #808080;
+  padding: 2px 4px;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  margin: 4px 5px;
+}
+
+input.number {
+  text-align: right;
+  font-weight: bold;
+  font-size: 14px;
+  width: 35px;
+}
+span.units {
+  color: #AAAAAA;
+}
+
+/* Date Picker */
+span.datepickerparent {
+    position:relative;
+}
+div.datepicker {
+    border-color: #888888;
+    border: 1px;
+	  border-style: solid;
+    background-color: #DDDDDD;
+    display: none;
+    position: absolute;
+    text-align: center;
+    top: 1.8em;
+    left: 0px;
+    width: 175px;
+    z-index: 10;
+}
+table.datepicker {
+  border-spacing: 0px;
+}
+table.datepicker td {
+  padding: 1px;
+  width: 25px;
+  height: 20px;
+  text-align: center;
+}
+tr.dpheader {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+a.dpnext {
+  display: inline-block;
+  width: 23px;
+  height: 18px;
+}
+a.dpfootertoday {
+  display: inline-block;
+  color: #0066DD;
+  background-color: #DDDDDD;
+}
+a.dpfooteractive {
+  display: inline-block;
+  color: #AA7700;
+  background-color: #DDDDDD;
+}
+a.datepickercell {
+  display: inline-block;
+  background-color: #EEEEEE;
+  width: 23px;
+  height: 18px;
+}
+a.datepickercell:hover {
+  background-color: #FFFFFF;
+}
+a.dptoday {
+  color: #0066DD;
+  background-color: #DDE8FF;
+}
+a.dpsel {
+  color: #33BB00;
+  background-color: #E4FFDD;
+}
+a.dpactive {
+  color: #AA7700;
+  background-color: #FFEECC;
+}
+
+/* Multi Select */
+div.multiselect {
+  height: 200px;
+  width: 475px;
+  overflow: auto;
+  border: 1px solid #808080;
+  padding: 3px;
+}
+label.multiselecty {
+  display: inline-block;
+  margin: 1px 0px 0px 1px;
+  padding: 2px;
+  border: 1px solid #70D033;
+  width: 146px;
+  background-color: #B0F888;
+}
+label.multiselecty:hover {
+  background-color: #90E844;
+}
+label.multiselecty input[type="checkbox"] {
+  margin: default;
+}
+label.multiselectn {
+  display: inline-block;
+  margin: 1px 0px 0px 1px;
+  padding: 2px;
+  border: 1px solid #EEEEEE;
+  width: 146px;
+  background-color: #FFFFFF;
+}
+label.multiselectn:hover {
+  background-color: #CCCCCC;
+}
+a.multiselect {
+  display: inline-block;
+  color: #000000;
+  width: 119px;
+  padding: 3px;
+}
+a.multiselect:hover {
+  color: #000000;
+}

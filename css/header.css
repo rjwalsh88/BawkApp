@@ -1,0 +1,119 @@
+tr.header {
+	background-color: #000000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#e8d258), to(#1880D8));
+  background: -moz-linear-gradient(top,  #e8d258,  #1880D8);
+}
+
+div.logininfo {
+  color: #C0FFA0;
+  text-align: right;
+  padding-bottom: 8px;
+  font-size: 12px;
+  text-shadow: #081010 1px 2px 1px;
+}
+span.loginname {
+  font-size: 16px;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: #FFFFFF;
+}
+
+td.header {
+  height: 90px;
+	font-family: Helvetica, arial, sans-serif;
+	background-image: url(../images/site/banner.png);
+  background-repeat:no-repeat;
+	color: #808080;
+	vertical-align: bottom;
+	padding-bottom: 0px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+td.headerside {
+	width: auto;
+  height: 90px;
+	font-family: Helvetica, arial, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: left;
+	vertical-align: bottom;
+	margin: 5px;
+}
+
+td.body {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+td.bodyside {
+	width: auto;
+}
+td.footer {
+	font-family: Helvetica, arial, sans-serif;
+	background-color: #FFFFFF;
+	color: #808080;
+	font-size: 10px;
+	text-align: center;
+	font-style: italic;
+	vertical-align: middle;
+	margin: 5px;
+}
+div.navigation {
+	font-size: 16px;
+	text-align: left;
+	padding-top: 2px;
+	padding-bottom: 0px;
+}
+div.notifications {
+	font-style: italic;
+	color: #119900;
+}
+
+img.largeicon {
+	border: 0;
+	vertical-align: middle;
+}
+a.nav {
+  display: inline-block;
+	color: #FFFFFF;
+	text-decoration: none;
+  filter:alpha(opacity=75);
+  opacity:0.75;
+	margin: 0px 2px;
+  padding: 5px 7px;
+  -moz-border-radius-topleft: 6px;
+  -webkit-border-top-left-radius: 6px;
+  -moz-border-radius-topright: 6px;
+  -webkit-border-top-right-radius: 6px;
+	border: 1px solid transparent;
+	border-bottom: 0px;
+
+}
+a.nav:hover {
+	color: #FFFFFF;
+	background-color: #887818;
+	text-decoration: none;
+  filter:alpha(opacity=100);
+  opacity:1.0;
+  border: 1px solid #1880D8;
+	border-bottom: 0px;
+}
+a.navsel {
+  display: inline-block;
+  color: #1880D8;
+	background-color: #DDDDDD;
+	font-weight: bold;
+	text-decoration: none;
+	margin: 0px 2px;
+  padding: 5px 7px;
+  -moz-border-radius-topleft: 6px;
+  -webkit-border-top-left-radius: 6px;
+  -moz-border-radius-topright: 6px;
+  -webkit-border-top-right-radius: 6px;
+  border: 1px solid #1880D8;
+	border-bottom: 0px;
+}
+a.navsel:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #887818;
+}

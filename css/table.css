@@ -1,0 +1,75 @@
+tr.plain {
+	background-color: #FFFFFF;
+}
+tr.striped {
+	background-color: #E8E8E8;
+}
+.datatable tr.plain {
+  
+}
+.hoverrows tr.plain:hover, 
+.hovercells .plain td:hover {
+	background-color: #E2F4FF;
+}
+.hoverrows tr.striped:hover,
+.hovercells .striped td:hover {
+	background-color: #C8E8F6;
+}
+
+.fieldtable th, .datatable th, .calendar th {
+	font-weight: bold;
+	color: #444444;
+	padding: 2px 5px;
+}
+.fieldtable td, .datatable td {
+	padding: 2px 5px;
+}
+
+.fieldtable hr, .datatable hr {
+  border: 0;
+  color: #D0D0D0;
+  background-color: #D0D0D0;
+  height: 1px;
+}
+
+
+td.genimage {
+	padding: 1px;
+}
+table.fieldtable {
+	margin-top: 4px;
+	margin-bottom: 5px;
+}
+table.datatable {
+	margin-top: 4px;
+	margin-bottom: 8px;
+	width: 100%;
+  border-collapse:collapse;
+}
+.datatable tbody, .calendar tbody {
+	border: 1px solid #D0D0D0;
+}
+table.calendar {
+  border-spacing: 0px;
+	margin-top: 4px;
+	margin-bottom: 5px;
+  border-collapse:collapse;
+}
+div.caldate {
+	padding-bottom: 0px;
+	padding-right: 1px;
+  padding-bottom: 1px;
+	border-bottom: solid 1px #B0B0B0;
+	margin-bottom: 2px;
+	text-align: right;
+  font-size: 11px;
+  font-weight: bold;
+  color: #808080;
+}
+td.caldata {
+  text-align: left;
+  padding-top: 3px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
