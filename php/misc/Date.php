@@ -40,9 +40,9 @@ function construct_datetime($date, $time) {
   }
 
   $dates = array(
-    '3/23/2012',
-    '3/24/2012',
-    '3/25/2012',
+    '4/6/2012',
+    '4/7/2012',
+    '4/8/2012',
   );
   $date = (int) $date;
   $time = $dates[$date] . ' ' . $time;
@@ -52,9 +52,9 @@ function construct_datetime($date, $time) {
 
 function reverseDate($dateStr) {
 	$dates = array(
-		'2012-03-23' => 0,
-		'2012-03-24' => 1,
-		'2012-03-25' => 2,
+		'2012-04-06' => 0,
+		'2012-04-07' => 1,
+		'2012-04-08' => 2,
 	);
 	return $dates[$dateStr];
 }

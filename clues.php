@@ -134,30 +134,34 @@ switch ($action) {
 $page = new UIPage();
 $position = Session::defaultPosition();
 
-function answerForm($clueID, $clueSalt, $hashedAnswers) {
+function answerForm($clueID, $clueSalt, $hashedAnswers, $serialized) {
 	return <<<EOT
-<form method="POST" action="clues.php" onsubmit="return tryAnswer($clueID);">
+<form id="answerform" method="POST" action="clues.php">
 <input type="text" name="guess" size=30 id="g$clueID" />
 <input type="submit" name="answer" value="Submit" />
 <br />
 <span id="feedback" style="font-size: 12px; color: #FF0000;"></span>
-<input type="hidden" name="id" value="$clueID" />
+<input type="hidden" id="clueID" name="id" value="$clueID" />
 <input type="hidden" id="latitude" name="latitude" />
 <input type="hidden" id="longitude" name="longitude" />
 <input type="hidden" name="salt" id="s$clueID" value="$clueSalt" />
 <input type="hidden" name="hashedAnswers" id="a$clueID" value="$hashedAnswers" />
 </form>
+<script type="text/javascript">
+        var clueModel = $serialized;
+</script>
 EOT;
 }
 function displayCurrentClue(Clue $clue, $team, $clueState = STATE_UNLOCKED) {
-	$text = str_replace("\n", "<br />\n", $clue->getQuestion());
+	$text = '<span id="question">' . str_replace("\n", "<br />\n", $clue->getQuestion()) .'</span>';
 	if ($clueState >= STATE_HINTED && $clue->getHint() != '') {
 		$text .= '<br /><b>HINT:</b> ' . $clue->getHint();
 	}
 	return $text . '<br />' . answerForm(
 	  $clue->getID(),
 	  $clueState >= STATE_ANSWERABLE ? $clue->getSalt() : '',
-	  $clueState >= STATE_ANSWERABLE ? $clue->getHashedAnswers() : ''
+	  $clue->getHashedAnswers(),
+      $clue->serialize() 
 	);
 }
 function displayPastClue(Clue $clue, $team, $clueState = STATE_UNLOCKED) {
@@ -251,8 +255,10 @@ if ($position >= POSITION_PLAYER) {
 
     default:
       require_js('jquery-1.5.1.min');
+      require_js('jquery.form');
       require_js('checkin');
       require_js('answering');
+      require_js('sjcl');
 
       $team = Session::currentPerson()->getTeam();
       if ($team) $team->doRefreshClueStates();
@@ -287,6 +293,7 @@ if ($position >= POSITION_PLAYER) {
       }
 
 			if ($displayed == 0) $past_clues = 'No past clues.';
+            $past_clues = '<div id="pastclues">' . $past_clues . '</div>';
 			$text = UIText::exactText($past_clues);
 			$page->addElement($text->setTitle('Past Clues'));
 

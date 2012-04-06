@@ -1,29 +1,104 @@
-// javascript onClick for form submit button of
-function tryAnswer(clue_id) {
-  var guess = $('#g' + clue_id).val();
-	var answerData = $('#a' + clue_id).val();
-	var salt = $('#s' + clue_id).val();
+function lZ(n) {
+    return n < 10 ? '0' + n : n;
+}
 
-	// too early to answer, revert to server
-	if (answerData == '') return true;
+function fD(d) {
+    return (d.getHours() % 12) + ':' + lZ(d.getMinutes()) + (d.getHours() > 12 ? 'PM' : 'AM');
+}
 
-	var hashedAnswers = answerData.split(' ');
-	var hashedGuess = hashGuess(guess, salt);
-	for (var i = 0; i < hashedAnswers.length; i++) {
-	    var hashedAnswer = hashedAnswers[i];
-	    if (hashedAnswer == hashedGuess || hashedAnswer == '*') {
-    	  return true;
-    	}
-	}
-	// else...
-    $('#feedback').text('The answer "' + guess + '" is incorrect.');
+var MILES_PER_DEGREE_LAT = 69.1;
+var MILES_PER_DEGREE_LONG_EQUATOR = 69.1;
+
+function modifyLatitude(lat, deltaMiles) {
+    return lat + deltaMiles / MILES_PER_DEGREE_LAT;
+}
+function modifyLongitude(lat, lon, deltaMiles) {
+    return lon + deltaMiles / (MILES_PER_DEGREE_LONG_EQUATOR * Math.cos(lat * 0.01745));
+}
+function distMiles(lat1, long1, lat2, long2) {
+    var avgLat = (lat1 + lat2) / 2;
+    var latDist = MILES_PER_DEGREE_LAT * (lat1 - lat2);
+    var longDist = (MILES_PER_DEGREE_LONG_EQUATOR * Math.cos(avgLat)) * (long1 - long2);
+    return Math.sqrt(latDist * latDist + longDist * longDist);
+}
+
+function locationCheck(dlat, dlon, dir, dist) {
+    dlat = parseFloat(dlat);
+    dlon = parseFloat(dlon);
+    dist = parseFloat(dist);
+
+    var lat = parseFloat($('#latitude').val());
+    var lon = parseFloat($('#longitude').val());
+    
+    switch (parseInt(dir)) {
+    case 0: // north
+        return lat > modifyLatitude(dlat, dist);
+    case 1: // east
+        return lon > modifyLongitude(dlat, dlon, dist);
+    case 2: // south
+        return lat < modifyLatitude(dlat, dist);
+    case 3: // west
+        return lon < modifyLongitude(dlat, dlon, dist);
+    case 4: // near
+        return distMiles(lat, lon, dlat, dlon) < dist;
+    }
     return false;
-}
+} 
 
-function hashGuess(guess, salt) {
-	guess = salt + $.trim(guess.toLowerCase());
-	return hex_md5(guess);
-}
+$(document).ready(function() {
+$('#answerform').submit(function() {
+        var clue_id = $('#clueID').val();
+        var guess = $('#g' + clue_id).val();
+        var answerData = $('#a' + clue_id).val();
+        
+        // too early to answer, revert to server
+        if (answerData == '') return true;
+        if (Date.now() < Date.parse(clueModel.starttime)) {
+            $('#feedback').text('You cannot answer this clue yet! Please try again later.');
+            return false;
+        }
+        if (clueModel.startcity && !locationCheck(clueModel.startcity.lat, 
+                                                  clueModel.startcity.lon,
+                                                  clueModel.startdirection,
+                                                  clueModel.startdistance)) {
+            $('#feedback').text('You are too far to answer this!  Please try again later.');
+            return false;
+        }
+            
+        
+        var encryptedAnswers = answerData.split(' ');
+        for (var i = 0; i < encryptedAnswers.length; i++) {
+            var encryptedAnswer = encryptedAnswers[i];
+            if (encryptedAnswer == '*') return true;
+            try {
+                var data = sjcl.decrypt(guess, encryptedAnswer);
+                $('#feedback').text('Correct!');
+                var pc = $('#pastclues').html();
+                if (pc == 'No past clues.') pc = '';
+                $('#pastclues').html($('#question').text() + '<br/><i>Your Answer:</i> ' + guess + ' (at ' + fD(new Date()) + ')<br/><br/>' + pc);
+                $('#answerform').ajaxSubmit({
+                        beforeSubmit: function(arr, $form, options) {
+                            arr.push({ name: 'answer', value: 'answer' });
+                        }
+                    });
+                if (data == 'done!') return false;
+                data = JSON.parse(data);
+                $('#question').text(data.question);
+                $('#g' + clue_id).attr('id', 'g' + data.id).val('');
+                $('#a' + clue_id).attr('id', 'a' + data.id).val(data.answers);
+                $('#clueid').val(data.id);
+                clueModel = data;
+                return false;
+            } catch (e) {
+                // Probably failed, bad guess.
+                if (console && console.log) console.log("Error: " + e);
+            }
+        }
+        // else...
+        $('#feedback').text('The answer "' + guess + '" is incorrect.');
+        return false;
+    });
+    });
 
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message

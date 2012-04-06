@@ -118,23 +118,29 @@ class Clue extends AdminEditableDBRecord {
 	}
 	public function getHashedAnswers() {
 		$answers = $this->getAnswers();
-    $salt = $this->getSalt();
+        $salt = $this->getSalt();
 		$text = '';
 		foreach ($answers as $answer) {
 			if ($text != '') $text .= ' ';
-			$text .= $answer->hashAnswer($salt);
+            // Data should contain serialized next clue
+            $data = 'done!';
+            if ($this->getNextClue()) {
+                $data = $this->getNextClue()->serialize();
+            }
+            $command = "node js/sjcl-node '" . $answer . "' '" . $data . "'";
+            $text .= htmlspecialchars(exec($command));
 		}
 		return $text;
 	}
 	public function getSalt() {
-    return substr(md5('clue' . $this->getID()), 0, 8);
+        return substr(md5('clue' . $this->getID()), 0, 8);
 	}
 
 	// CLUE STATES
 
 	protected
-	  $allStatesFetched = false,
-    $clueStates = array();
+        $allStatesFetched = false,
+        $clueStates = array();
 
 	public function isGuessCorrect($guess) {
 		$answers = $this->getAnswers();
@@ -343,6 +349,21 @@ class Clue extends AdminEditableDBRecord {
 	    }
 	  }
     return idx(self::$cache, $id);
+  }
+
+  public function serialize() {
+      // JSON encodes a clue for the local storage app
+      $city = $this->getStartCityID() ? $this->getStartCity()->serialize() : null;
+      return json_encode(array(
+              'id' => $this->getID(),
+              'name' => $this->getName(),
+              'question' => $this->getQuestion(),
+              'answers' => $this->getHashedAnswers(),
+              'startcity' => $city,
+              'starttime' => $this->getStartTime(),
+              'startdirection' => $this->getStartDirection(),
+              'startdistance' => $this->getStartDistance()
+          ));
   }
 
   public function getNextClue() {

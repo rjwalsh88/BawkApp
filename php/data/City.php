@@ -133,6 +133,14 @@ class City extends ReadOnlyDBRecord {
 		foreach ($cities as $key => $item) $names[$key] = $item->getName();
 		return $names;
 	}
+
+    public function serialize() {
+        // We cheat here, since we don't need to double serialize in Clue.php
+        return array( 
+            'lat' => $this->getLat(),
+            'lon' => $this->getLong()
+        );
+    }
 }
 
 ?>
