@@ -312,8 +312,8 @@ class DBQuery {
  */
 class DBTable {
   public static function connect() {
-    mysql_connect("localhost", "root", "3w5e11264sgsf");
-    mysql_select_db("bawkapp") or die(mysql_error());
+      mysql_connect("mysql-user.stanford.edu", "ccs198bawk0", "oofemeid");
+      mysql_select_db("c_cs198_bawk") or die(mysql_error());
   }
   private static $connected = false;
   private static $tables;

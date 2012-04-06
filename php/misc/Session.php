@@ -111,7 +111,7 @@ class Session {
    */
   private static function getWebAuthUserID() {
     $id = idx($_ENV, 'WEBAUTH_USER');
-    return 'rjwalsh';
+
     // switch to another name for multi-browser demos, or testing purposes
     // if (in_array($id, array('mattbush')) && 
     //     self::$course_names['beta']) {
